@@ -1,0 +1,138 @@
+:root {
+    --input-hover: rgb(203, 201, 201);
+    --focus-shadow: rgba(161, 161, 162, 0.4);
+
+    --button-bg: #67078a;
+    --button-border: #8213aa;
+    --button-txt: white;
+
+    --valid-color: rgb(22, 158, 22);
+    --invalid-color: rgb(255, 24, 24);
+
+    --default-border: grey;
+    --state-color: grey;
+    --fade-color: hsl(0 0% 100% / 60%);
+    --field-background: linear-gradient(var(--fade-color), var(--fade-color)), 
+        radial-gradient(ellipse at top, var(--state-color) 0, white 60%) center top / 380% 120% no-repeat, white;
+}
+/* style switches for themes */
+:root.dark {
+    --default-text: white;
+    --default-border: grey;
+    --state-color: grey;
+    --fade-color: hsl(0 0% 100% / 60%);
+    --field-background: linear-gradient(var(--fade-color), var(--fade-color)), 
+        radial-gradient(ellipse at top, var(--state-color) 0, white 60%) center top / 380% 120% no-repeat, white;
+}
+:root.light {
+    --default-text: rgb(44, 44, 44);
+    
+    --default-border: rgb(13, 11, 13);
+    --state-color: rgb(90, 86, 86);
+    --fade-color: hsla(0, 0%, 62%, 0.664);
+    --field-background: linear-gradient(var(--fade-color), var(--fade-color)), 
+        radial-gradient(ellipse at top, var(--state-color) 0, white 60%) center top / 380% 120% no-repeat, white;
+}
+
+@layer reset {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+}
+
+body {
+    
+    form {
+        display: flex;
+        flex: 1 1 fit-content;
+        flex-direction: column;
+        align-content: center;
+        align-items: flex-start;
+        gap: 0.5rem;
+
+        label {
+            font-size: 1.5rem;
+        }
+
+        input {
+            padding: 5px;
+            width: min(calc(1100px - 45vw), 90vw);
+            height: min(7vh, 40px);
+
+            border: 3px outset var(--default-border);
+            border-radius: 15px;
+            
+            background: var(--field-background);
+        }
+
+        input:hover {
+            background-color: var(--input-hover);
+        }
+        input:focus {
+            box-shadow: 3px 4px 5px 1px var(--focus-shadow);
+            border-radius: 15px;
+            padding: 5px;
+
+            height: min(7vh, 40px);
+        }
+        input:required {
+            border-color: var(--default-border);
+        }
+        input:user-invalid {
+            border-color: var(--invalid-color);
+            --state-color: var(--invalid-color);
+        }
+        input:user-valid {
+            border-color: var(--valid-color);
+            --state-color: var(--valid-color);
+        }
+
+        #comment_container {
+            display: flex;
+            flex: 0 0 fit-content;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+                margin-top: 0.5rem;
+
+                span {
+                    color: var(--default-text);
+                }
+            }
+        }
+
+        button {
+            width: min(calc(600px - 30vw), 70vw);
+            height: max(5vh, fit-content);
+
+            margin-top: 1rem;
+            padding: 7px 20px;
+            border: 4px solid var(--button-border);
+            border-radius: 20px;
+
+            font-size: 1.5rem;
+            color: var(--button-txt);
+
+            background-color: var(--button-bg);
+        }
+        button:focus {
+            padding: 7px 20px;
+            border-radius: 20px;
+        }
+        button:hover {
+            background-color: var(--button-border);
+        }
+    }
+
+    form > * {
+        align-self: center;
+        font-size: 1.05rem;
+    }
+
+    footer {
+        padding-top: 2rem;
+    }
+}
