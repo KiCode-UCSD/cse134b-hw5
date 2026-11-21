@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+    <head>
+        <!--link css and metadata-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./styles/index.css">
+        <link rel="stylesheet" href="./styles/mode-toggle.css">
+        
+        <script src="./scripts/themes.js" defer></script>
+
+        <title>My Resume</title>
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <!--Main Navbar-->
+        <nav class="top-navbar">
+            <a href="../index.html">Home</a>
+            <!--Overwrite link styling for current page and remove link (don't need to reload page you're already on)-->
+            <a style="background-color:rgba(180, 180, 180, 0.5); border-radius: 10px;">Resume</a>
+            <a href="./projects.html">Projects</a>
+            <a href="./about_me.html">About</a>
+            <a href="./experiments.html">Experiments</a>
+            <a href="../index.html#contact">Contact Me</a>
+            <a href="../form-with-js.html">Feedback Form</a>
+            <a href="../form-no-js.html">No JS Form</a>
+        </nav>
+
+        <header>
+            <h1>My Resume</h1>
+        </header>
+
+        <!--Light/Dark mode toggle, make invisible until js loads-->
+        <div id="toggle_container" style="opacity: 0;">
+            <!--set checkbox default to dark mode, tabindex=0 is so keyboards can access it-->
+            <input type="checkbox" id="mode_toggle" name="mode_toggle" tabindex="0" checked>
+            <label id="slider" for="mode_toggle" aria-label="Light/dark mode toggle"></label>
+            <!--<span id="slider"></span>-->
+        </div>
+
+        <main id="main">
+            <iframe id="resume"
+                title="My Resume PDF"
+                src="assets/My-Resume.pdf#zoom=60"
+                width="600"
+                height="600"
+                loading="lazy">
+            </iframe>
+        </main>
+
+        <footer>
+            <span>
+                Download <a href="assets/My-Resume.pdf" download>my resume</a>
+            </span>
+        </footer>
+    </body>
+</html>

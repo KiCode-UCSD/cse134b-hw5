@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en" class="dark">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./part2/styles/index.css">
+        <link rel="stylesheet" href="./part2/styles/form.css">
+        <link rel="stylesheet" href="./part2/styles/mode-toggle.css">
+
+        <script src="./form.js" defer></script>
+        <script src="./part2/scripts/themes.js" defer></script>
+
+        <!--Hide js dependent elements if js is disabled/breaks-->
+        <noscript defer>
+            <style>
+                #chars_remaining {
+                    display:none;
+                }
+            </style>
+        </noscript>
+
+        <title>Feedback Form With JS</title>
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <!--Main Navbar-->
+        <nav role="navigation" class="top-navbar">
+            <a href="./index.html">Home</a>
+            <a href="./part2/resume.html">Resume</a>
+            <a href="./part2/projects.html">Projects</a>
+            <a href="./part2/about_me.html">About</a>
+            <a href="./part2/experiments.html">Experiments</a>
+            <a href="./index.html#contact">Contact Me</a>
+            <!--Overwrite link styling for current page and remove link (don't need to reload page you're already on)-->
+            <a style="background-color:rgba(180, 180, 180, 0.5); border-radius: 10px;">Feedback Form</a>
+            <a href="./form-no-js.html">No JS Form</a>
+        </nav>
+
+        <header>
+            <h1 role="banner" aria-label="Feedback form">Feedback Form (with js)</h1>
+        </header>
+
+        <main id="main">
+            <!--Light/Dark mode toggle, make invisible until js loads-->
+            <div id="toggle_container" style="opacity: 0;">
+                <!--set checkbox default to dark mode, tabindex=0 is so keyboards can access it-->
+                <input type="checkbox" id="mode_toggle" name="mode_toggle" tabindex="0" checked>
+                <label id="slider" for="mode_toggle" aria-label="Light/dark mode toggle"></label>
+                <!--<span id="slider"></span>-->
+            </div>
+
+            <form method="post" action="https://httpbin.org/post" aria-live="polite">
+                <label for="name">Enter your name:</label>
+                <input type="text" id="name" name="name" autocomplete="name" minlength="1" maxlength="100" required>
+
+                <label for="email">Enter your email:</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+
+                <div id="comment_container" aria-label="comment area">
+                    <label for="comments">Comments?</label>
+                    <input type="textarea" id="comments" name="comments" aria-describedby="chars_remaining" minlength="10" maxlength="1000" required>
+                    
+                    <p id="chars_remaining">
+                        <span id="character_message">Characters remaining: </span>
+                        <span id="num_remaining">1000</span>
+                    </p>
+                </div>
+
+                <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+                <input type="hidden" id="form_errors" name="form_errors" value="">
+                
+                <button type="submit" aria-label="submit form">Submit</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>Trouble with the form? Try the <a href="./form-no-js.html">form without JavaScript</a></p>
+        </footer>
+    </body>    
+</html>

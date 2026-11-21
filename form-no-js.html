@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" class="dark">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./part2/styles/index.css">
+        <link rel="stylesheet" href="./part2/styles/form.css">
+
+        <title>Feedback Form Without JS</title>
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <!--Main Navbar-->
+        <nav class="top-navbar">
+            <a href="./index.html">Home</a>
+            <a href="./part2/resume.html">Resume</a>
+            <a href="./part2/projects.html">Projects</a>
+            <a href="./part2/about_me.html">About</a>
+            <a href="./part2/experiments.html">Experiments</a>
+            <a href="./index.html#contact">Contact Me</a>
+            <a href="./form-with-js.html">Feedback Form</a>
+            <!--Overwrite link styling for current page and remove link (don't need to reload page you're already on)-->
+            <a role="link" aria-label="Feedback form link without JS" style="background-color:rgba(180, 180, 180, 0.5); border-radius: 10px;">No JS Form</a>
+        </nav>
+
+        <header>
+            <h1 role="banner" aria-label="Feedback form">Feedback Form (without js)</h1>
+        </header>
+
+        <main id="main">
+            <form method="post" action="https://httpbin.org/post">
+                <label for="name">Enter your name:</label>
+                <input type="text" id="name" name="name" autocomplete="name" minlength="1" maxlength="100" required>
+
+                <label for="email">Enter your email:</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+
+                <label for="comments">Comments?</label>
+                <input type="textarea" id="comments" name="comments" minlength="10" maxlength="1000" required>
+
+                <input type="hidden" id="possible_bot" name="possible_bot" value="true">
+
+                <button type="submit" aria-label="submit form">Submit</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>Want to go back? Try the <a href="./form-with-js.html">form with JavaScript</a></p>
+        </footer>
+    </body>    
+</html>
