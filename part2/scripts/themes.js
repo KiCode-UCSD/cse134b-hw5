@@ -38,7 +38,6 @@ function init() {
 function setTheme(mode) {
     // theme = mode
     console.log(`Set theme to: ${mode}`);
-    console.log(root.classList.value);
     root.classList.value = mode;
 }
 

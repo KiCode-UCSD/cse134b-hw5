@@ -1,0 +1,70 @@
+---
+import ThemeToggle from "../components/ThemeToggle.astro"
+import TopNavbar from "../components/TopNavbar.astro"
+
+const ASTRO_BASE = "/";
+---
+
+<html lang="en" class="dark">
+    <head>
+        <!--link css and metadata-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="generator" content={Astro.generator} />
+
+        <link rel="stylesheet" href={`${ASTRO_BASE}styles/index.css`}>
+        <link rel="stylesheet" href={`${ASTRO_BASE}styles/mode-toggle.css`}>
+
+        <script src={`${ASTRO_BASE}scripts/main.js`} defer></script>
+        <script src={`${ASTRO_BASE}scripts/themes.js`} defer></script>
+
+        <title>Homepage</title>
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main">Skip to main content</a>
+        
+        <!--Main Navbar-->
+        <TopNavbar baseFolder={ASTRO_BASE} />
+
+        <header>
+            <h1>My Homepage</h1>
+            <!--(100,10)=top (70,78) (10,78)=left (60,128) (40,198)=bot left      	 
+                (100,158) (160,198)=bot right (140,128) (190,78)=right (130,78)-->
+            <svg width="50" height="50" viewBox="0 0 200 200" fill="none" aria-hidden>
+                <polygon points="100,10 70,78 10,78 60,128 40,198 100,158 160,198 140,128 190,78 130,78"
+                style="fill:rgb(215, 226, 16); stroke:rgb(187, 196, 10);stroke-width:5;" />
+            </svg>
+
+            <hello-world></hello-world>
+        </header>
+
+        <!--Light/Dark mode toggle, make invisible until js loads-->
+        <ThemeToggle />
+
+        <main id="main">
+            <h2>Welcome to My Portfolio Site!</h2>
+
+            <section id="portfolio_intro">
+                <picture>
+                    <!--set image to higher resolution if possible, fall back to webp-->
+                    <source srcset={`${ASTRO_BASE}assets/portrait.webp, ${ASTRO_BASE}assets/portrait.JPG 2x`}>
+                    <img src={`${ASTRO_BASE}assets/portrait.webp`} width="300" alt="Professional picture of me">
+                </picture>
+
+                <p>
+                    I see you've made your way to my little corner of the internet. If you want to know more about me, feel free to roam about!
+                </p>
+            </section>
+        </main>
+        <footer>
+            <h2 id="contact">Contact me:</h2>
+
+            <contact_info>
+                <span>My <a href="mailto:r8diaz@ucsd.edu">school email</a></span>
+                <span>My <a href="mailto:ki.diaz.2005@gmail.com">personal email</a></span>
+                <span>My <a href="https://www.linkedin.com/in/ki-diaz-7408ba369?trk=people-guest_people_search-card"> LinkedIn page</a></span>
+            </contact_info>
+        </footer>
+    </body> 
+</html>

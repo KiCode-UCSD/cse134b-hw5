@@ -1,0 +1,38 @@
+@view-transition { navigation: auto; }
+
+@supports (view-transition-name: right-sidebar) {
+    .right-sidebar {
+        view-transition-name: right-sidebar;
+    }
+}
+
+::view-transition-old(right-sidebar),
+::view-transition-new(right-sidebar) {
+    animation-duration: 250ms;
+    animation-timing-function: ease-out;
+}
+
+::view-transition-old(right-sidebar) {
+    animation-name: sidebar-out;
+}
+
+::view-transition-new(right-sidebar) {
+    animation-name: sidebar-in;
+}
+
+@keyframes sidebar-out {
+    to { transform: translateX(-12px); }
+}
+
+@keyframes sidebar-in {
+    from { transform: translateX(12px); }
+}
+
+/* Keep the effect subtle for users who request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(right-sidebar),
+    ::view-transition-old(right-sidebar),
+    ::view-transition-new(right-sidebar) {
+        animation: none;
+    }
+}

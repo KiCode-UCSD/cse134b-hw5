@@ -1,0 +1,11 @@
+---
+const { baseFolder } = Astro.props;
+
+---
+
+<nav class="top-navbar">
+    <!--Overwrite link styling for current page and remove link (don't need to reload page you're already on)-->
+    <a href={`/`}>Home</a>
+    <a href={`/about_me`}>About</a>
+    <a href="/#contact">Contact Me</a>
+</nav>

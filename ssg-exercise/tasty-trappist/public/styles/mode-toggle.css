@@ -1,0 +1,93 @@
+:root {
+  --switch-width: 3.5em;
+  --switch-height: 2em;
+  --icon-size: 1.4em;
+  --slider-offset: 0.3em;
+
+  --toggle-radius: 38px;
+
+  --toggle-focus-dark: #a7a4f1;
+  --toggle-bg-dark: #383136;
+
+  --toggle-focus-light: #5852f5;
+  --toggle-bg-light: #e1e0e0;
+}
+/* style switches for themes */
+:root.dark {
+  --toggle-border: #727171;
+}
+:root.light {
+  --toggle-border: #2e2e2e7a;
+}
+
+#toggle_container {
+  position: relative;
+  display: inline-block;
+  width: var(--switch-width);
+  height: var(--switch-height);
+
+  border: 2px solid var(--toggle-border);
+  border-radius: var(--toggle-radius);
+  
+  translate: 88vw -12vh;
+}
+
+#toggle_container input {
+  /*display: none; -- DONT USE -- removes keyboard accessibility*/
+  opacity: 0;
+  width: var(--switch-width);
+  height: var(--switch-height);
+}
+
+#slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--toggle-bg-light);
+  transition: 0.4s;
+  border-radius: var(--toggle-radius);
+  z-index: -1;
+}
+
+#slider:before {
+    position: absolute;
+    content: '';
+
+    height: var(--icon-size, 1.4em);
+    width: var(--icon-size, 1.4em);
+    border-radius: 20px;
+
+    left: var(--slider-offset, 0.3em);
+    top: 50%;
+    
+    transform: translateY(-50%);
+    background: linear-gradient(48deg, #ff0088, #ff8c00 70%);
+        
+    transition: 0.4s;
+}
+
+input:checked + #slider {
+  background: var(--toggle-bg-dark);
+}
+
+input:checked + #slider:before {
+    left: calc(100% - (var(--icon-size, 1.4em) + var(--slider-offset, 0.3em)));
+    background: var(--toggle-bg-dark);
+
+    /* change value of 2nd inset in boxshadow to change angle
+       and direction of the moon */
+    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+}
+
+/* adding keyboard accessibility with focus and tabbing */
+#toggle_container:focus-within:has(input:checked) {
+    border: 2px solid var(--toggle-focus-dark);
+    border-radius: var(--toggle-radius);
+}
+#toggle_container:focus-within:not(:checked) {
+    border: 2px solid var(--toggle-focus-light);
+    border-radius: var(--toggle-radius);
+}
