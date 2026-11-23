@@ -18,10 +18,36 @@
     --fonts-4: Verdana, Geneva, Tahoma, sans-serif;
     --fonts-5: cursive;
     --fonts-6: monospace;
+    --fonts-7: Geneva Verdana, 'Arial Narrow Bold', Arial, sans-serif;
 
     --h1-size: 2rem;
     --h2-size: 1.4rem;
-    --h3-size: 1.05rem; 
+    --h3-size: 1.05rem;
+    --h4-size: 1.01rem;
+    
+    /* fall back to dark theme if issue with loading theme occurs */
+    --primary-bg: #0d1117;
+    --article-bg: rgb(39, 38, 38);
+
+    --default-text: white;
+
+    --footer-bg: rgb(39, 38, 38);
+    --footer-border: rgb(69, 68, 68);
+    --footer-text: white;
+
+    --link-text: rgb(43, 176, 247);
+    --link-hover: rgba(16, 79, 113, 0.4);
+
+    --focus-color: rgba(116, 200, 245, 0.388);
+
+    --status-message-bg: rgba(138, 138, 138, 0.102);
+    --component-btn-border: rgb(59, 6, 80);
+    --component-border: rgb(46, 46, 46);
+    --component-header-color: rgb(147, 147, 227);
+    --component-bg: rgba(29, 29, 29, 0.785);
+    --component-text-color: white;
+    --component-compact: rgba(71, 71, 71, 0.229);
+    --component-compact-text: rgb(216, 216, 216);
 }
 /* style switches for themes */
 :root.dark {
@@ -45,6 +71,8 @@
     --component-header-color: rgb(147, 147, 227);
     --component-bg: rgba(29, 29, 29, 0.785);
     --component-text-color: white;
+    --component-compact: rgba(71, 71, 71, 0.229);
+    --component-compact-text: rgb(216, 216, 216);
 }
 :root.light {
     --primary-bg: #e6e6e6;
@@ -67,6 +95,8 @@
     --component-header-color: rgb(62, 62, 176);
     --component-bg: rgba(85, 85, 85, 0.343);
     --component-text-color: rgb(12, 12, 12);
+    --component-compact: rgba(119, 119, 119, 0.413);
+    --component-compact-text: rgb(48, 48, 48);
 }
 
 @layer reset {
@@ -174,8 +204,9 @@ body {
         }
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
         padding: 10px 15px;
+        font-family: var(--fonts-7);
     }
     h1 {
         font-size: var(--h1-size);
@@ -187,6 +218,9 @@ body {
     h3 {
         font-size: var(--h3-size);
         margin: 10px 0;
+    }
+    h4 {
+        font-size: var(--h4-size);
     }
 
     /* style page titles */
@@ -323,7 +357,7 @@ body {
                 border: 6px ridge var(--purple-border);
                 border-radius: 5px;
 
-                font-family: var(--fonts-5);
+                font-family: var(--fonts-7);
                 color: var(--button-text);
             }
             button:hover {
@@ -347,7 +381,7 @@ body {
                 background-color: rgb(224, 224, 91);
                 border: 5px ridge var(--purple-border);
 
-                font-family: var(--fonts-5);
+                font-family: var(--fonts-7);
 
                 display: flex;
                 flex-direction: column;
@@ -380,7 +414,7 @@ body {
 
             background-color: var(--navbar-bg);
 
-            font-family: var(--fonts-5);
+            font-family: var(--fonts-7);
             color: var(--button-text);
         }
         #cat_facts_toggle:focus {
@@ -400,13 +434,14 @@ body {
             background-color: var(--component-bg, rgb(68, 68, 68));
             
             h4 {
-                margin: 8px 0;
+                margin: 4px 0;
                 color: var(--component-header-color, rgb(142, 142, 212));
                 text-decoration: underline;
             }
 
             #fact_status {
                 width: 100%;
+                margin: 7px 0 4px;
                 border: 2px solid var(--status-message-bg, rgb(51, 51, 51));
                 background-color: var(--status-message-bg, rgb(54, 54, 54));
                 color: var(--component-text-color, white);
@@ -431,6 +466,19 @@ body {
                 margin: 10px 0;
                 border-radius: 18px;
                 background-color: var(--focus-color);
+            }
+
+            #compact_status {
+                font-size: 1.25rem;
+                background-color: var(--component-compact);
+                border-radius: 3px;
+                border: none;
+                padding: 0 0 4px;
+                top: 0;
+                margin: 0;
+                width: calc(100% + 6px);
+                height: 28px;
+                color: var(--component-compact-text);
             }
         }
 

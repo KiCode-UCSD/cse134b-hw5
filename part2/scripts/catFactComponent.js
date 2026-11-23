@@ -1,5 +1,5 @@
 class RandomCatFact extends HTMLElement {
-    static observedAttributes = ["hidden"];
+    static observedAttributes = ["visibility"];
 
     constructor() {
         super();
@@ -7,6 +7,10 @@ class RandomCatFact extends HTMLElement {
 
     connectedCallback() {
         const catFactEl = document.querySelector("cat-fact");
+
+        const compactStatus = document.createElement("button");
+        compactStatus.setAttribute("id", "compact_status");
+        compactStatus.textContent = "🞁"; //Hex: down = 1F782, up = 1F781;
 
         const catBtn = document.createElement("button");
         catBtn.setAttribute("id", "cat_fact_btn");
@@ -16,6 +20,7 @@ class RandomCatFact extends HTMLElement {
         statusMessage.setAttribute("id", "fact_status");
         statusMessage.setAttribute("role", "status");
 
+        catFactEl.appendChild(compactStatus);
         catFactEl.appendChild(catBtn);
         catFactEl.appendChild(statusMessage);
 
@@ -32,22 +37,36 @@ class RandomCatFact extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         const factToggleBtn = document.getElementById("cat_facts_toggle");
-
-        // if hidden is null, show cat fact component
-        if (name === "hidden" && newValue === null) {
+        const compactStatus = document.getElementById("compact_status");
+        // if visibility is null, show cat fact component
+        if (name === "visibility" && newValue === null) {
             console.log("hidden: false");
             factToggleBtn.textContent = "Hide Facts";
-            this.style = "display: flex";
+            //this.style = "display: flex";
+            const children = this.childNodes;
+            for (const child of children) {
+                child.style = "display: block";
+            }
+
+            // change arrow direction of compact status
+            compactStatus.textContent = "🞁";
+            compactStatus.style = "display: block; padding: 3px 0 0px;";
             
             // save preference to local storage
             localStorage.setItem("hw5-fact-visibility", "shown");
         }
-        // if hidden is present (aka ""), hide cat fact component
-        if (name === "hidden" && newValue === "") {
+        // if visibility is present (aka ""), hide cat fact component
+        if (name === "visibility" && newValue === "") {
             console.log("hidden: true");
             factToggleBtn.textContent = "Show Facts";
-            this.style = "display: none";    
-            
+            const children = this.childNodes;
+            for (const child of children) {
+                child.style = "display: none";
+            }
+
+            // change arrow direction of compact status
+            compactStatus.textContent = "🞃";
+            compactStatus.style = "display: block; padding: 0 0 2px;";
             // save preference to local storage
             localStorage.setItem("hw5-fact-visibility", "hidden");
         }
@@ -65,10 +84,13 @@ function init() {
     factBtn.addEventListener("click", generateRandomFact);
 
     const factToggleBtn = document.getElementById("cat_facts_toggle");
-    factToggleBtn.addEventListener("click", (event) => toggleFact(event, factToggleBtn));
+    factToggleBtn.addEventListener("click", toggleFact);
+    
+    const statusCompact = document.getElementById("compact_status");
+    statusCompact.addEventListener("click", toggleFact);
 }
 
-function toggleFact(event, button) {
+function toggleFact() {
     console.log("toggle fact");
     const catFactEl = document.querySelector("cat-fact");
     // if (button.textContent === "Show Facts") {
@@ -78,7 +100,7 @@ function toggleFact(event, button) {
     //     button.textContent = "Show Facts";
     // }
 
-    catFactEl.toggleAttribute("hidden");
+    catFactEl.toggleAttribute("visibility");
 }
 
 async function generateRandomFact() {
